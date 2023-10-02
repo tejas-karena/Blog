@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'blogpost/base.html' %}
+
+{% block blockname %}
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark my-1">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">{{author.first_name}}</h1><br>
+            <ul>
+                <li><p class="lead my-0">Email - {{author.email}}</p></li>
+                <li><p class="lead mb-0">Birth date - {{author.birth_date}}</p></li>
+                <li><p class="lead mb-0">Country - {{author.country}}</p></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container py-1">
+        {% for blog in data %}
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3 my-2">
+                <h2><a class="text-white bg-dark" href="{% url 'blog-detail' blog.pk %}">{{blog.title}}</a></h2>
+                <p class="text-white bg-dark">{{blog.pub_date}}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3 my-2">
+                <h2><a class="text-dark" href="{% url 'blog-detail' blog.pk %}">{{blog.title}}</a></h2>
+                <p class="text-dark">{{blog.pub_date}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock blockname %}

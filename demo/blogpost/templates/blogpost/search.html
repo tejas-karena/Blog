@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'blogpost/base.html' %}
+<head>
+    <title>Blog List</title>
+</head>
+{% block blockname %}
+
+<main>
+  <div class="container py-4">
+    {% if blog_list %}
+    {% for blog in blog_list %}
+      {% if forloop.counter|divisibleby:2 %}
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3 my-2">
+          <h2><a class="text-dark" href="{% url 'blog-detail' blog.pk %}">{{blog.title}}</a></h2>
+          <p class="text-dark">{{blog.pub_date}}</p>
+          <p><a class="text-dark" href="{% url 'author-detail' blog.author_id %}">{{blog.author.first_name}}</a></p>
+        </div>
+      </div>
+      {% else %}
+        <div class="col-md-6">
+          <div class="h-100 p-5 text-white bg-dark rounded-3 my-2">
+            <h2><a class="text-white bg-dark" href="{% url 'blog-detail' blog.pk %}">{{blog.title}}</a></h2>
+            <p class="text-white bg-dark">{{blog.pub_date}}</p>
+            <p><a class="text-white bg-dark" href="{% url 'author-detail' blog.author_id %}">{{blog.author.first_name}}</a></p>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    {% else %}
+      <p>No matching blog posts found.</p>
+    {% endif %}    
+  </div>  
+</main> 
+
+  {% endblock blockname %}      
+
+

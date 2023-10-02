@@ -1,0 +1,30 @@
+
+ {% extends 'blogpost/base.html' %}
+
+ {% block blockname %}
+ <div class="container my-5">
+     <div class="text-center">
+         <h1>Add Comments about <a href="{% url 'blog-detail' id %}">{{ title }}</a></h1>
+         <form method="post" action="{% url 'comment' id %}">
+             {% csrf_token %}
+             {% for field in form %}
+             <div>
+                 <p>
+                     <label>
+                         {{ field.label }}
+                         {% if field.label == "Username" %}
+                             <input value="{{ uname }}" required readonly>
+                         {% else %}
+                             {{ field }}
+                         {% endif %}
+                     </label>
+                 </p>
+             </div>
+             {% endfor %}
+ 
+             <input type="submit" value="Post Comment">
+         </form>
+     </div>
+ </div>
+ {% endblock blockname %}
+ 

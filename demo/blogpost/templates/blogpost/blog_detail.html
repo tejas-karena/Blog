@@ -1,0 +1,51 @@
+{% extends 'blogpost/base.html' %}
+
+{% block blockname %}
+
+<body>
+  <main class="container">
+    <div class="p-3 p-md-4 mb-3 my-2 text-white rounded bg-dark">
+      <div class="col-md-6 px-0">
+        <h1 class="display-4 fst-italic">{{content.title}}</h1>
+        <p class="lead my-3">{{content.pub_date}}</p>
+        <p class="lead mb-0"><a href="{% url 'author-detail' content.author_id %}" class="text-white fw-bold">by -
+            {{content.author.first_name}}</a></p>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">{{content.blog}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="h-100 p-3 w-60 bg-light border rounded-3">
+      <p class="">Commentbox</p>
+      {% for comment in comments %}
+      <div class="comment-content">
+        <div class="comment-author">
+          <span class="comment-link">{{comment.username.first_name}} </span>
+          <span class="comment-meta commentmetadata">
+            <span class="comment-date">({{comment.comment_date}})</span>
+          </span>
+        </div>
+        <div class="clr"></div>
+        <div class="comment-entry">
+          <div class="comment-content">
+            <p>{{comment.comment}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %} 
+      <a href="{% url 'comment' content.pk %}">Comment your thoughts</a>
+      
+    </div>
+  </main>
+
+</body>
+
+{% endblock blockname %}
+
